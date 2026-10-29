@@ -1,9 +1,89 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BORHAN UDDIN | Digital Profile</title><style>
-:root{--g:#d7b45a;--c:#f7f0df}*{box-sizing:border-box}body{margin:0;padding:24px 14px;background:radial-gradient(circle at top,#332916,#101010 48%);color:var(--c);font-family:system-ui,Arial,sans-serif}.card{max-width:560px;margin:auto;background:#191919;border:1px solid #9e8138;border-radius:26px;padding:28px 22px;text-align:center}.avatar{width:92px;height:92px;border:2px solid var(--g);border-radius:50%;display:grid;place-items:center;margin:auto;color:var(--g);font-size:30px;font-weight:800}.gold{color:var(--g)}h1{overflow-wrap:anywhere}.bio{white-space:pre-wrap;line-height:1.7}.item{text-align:left;padding:12px 0}.label{font-size:12px;letter-spacing:1px;color:var(--g)}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.btn{padding:13px 8px;border:1px solid var(--g);border-radius:12px;color:var(--g);text-decoration:none;font-weight:bold}.primary{background:var(--g);color:#17130a}.hide{display:none!important}</style></head><body><main class="card">
-<div class="avatar" id="avatar">BU</div><p class="gold">PERSONAL PROFILE</p><h1 id="name">BORHAN UDDIN</h1><p class="gold">DIGITAL VISITING CARD</p><p id="bio" class="bio"></p><hr style="border-color:#9e8138">
-<div class="item"><div class="label">PHONE</div><div id="phone">01922141412</div></div><div class="item"><div class="label">ADDRESS</div><div id="address">কৃষ্ণনগর, ঝিকরগাছা, যশোর</div></div>
-<div class="actions"><a class="btn primary" id="call" href="tel:+8801922141412">Call Me</a><a class="btn" id="wa" href="https://wa.me/8801922141412">WhatsApp</a><a class="btn" href="contact.vcf" download>Save Contact</a><a class="btn hide" id="fb" target="_blank" rel="noopener">Facebook</a><a class="btn hide" id="ig" target="_blank" rel="noopener">Instagram</a><a class="btn hide" id="mail">Email</a></div></main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const SUPABASE_URL="PASTE_SUPABASE_PROJECT_URL_HERE", SUPABASE_ANON_KEY="PASTE_SUPABASE_ANON_KEY_HERE";
-(async()=>{if(SUPABASE_URL.startsWith("PASTE_")||SUPABASE_ANON_KEY.startsWith("PASTE_"))return;try{const s=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);const {data}=await s.from("profiles").select("*").eq("id",1).single();if(!data)return;for(const k of ["name","phone","address","bio"])if(data[k])document.getElementById(k).textContent=data[k];if(data.photo_url)document.getElementById("avatar").innerHTML='<img style="width:100%;height:100%;object-fit:cover;border-radius:50%" src="'+data.photo_url+'" alt="Profile">';if(data.phone){let n=data.phone.replace(/\D/g,"");if(n.startsWith("0"))n="88"+n;document.getElementById("call").href="tel:+"+n;document.getElementById("wa").href="https://wa.me/"+n}for(const [id,key] of [["fb","facebook_url"],["ig","instagram_url"]])if(data[key]){let e=document.getElementById(id);e.href=data[key];e.classList.remove("hide")}if(data.email){let e=document.getElementById("mail");e.href="mailto:"+data.email;e.textContent="Email";e.classList.remove("hide")}}catch(e){console.log(e)}})();
-</script></body></html>
+ 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borhan Uddin | Digital Profile</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eaf3ff;color:#12336b;font-family:Arial,system-ui,sans-serif}
+.page{max-width:1000px;margin:20px auto;background:white;border-radius:18px;overflow:hidden;box-shadow:0 8px 30px #174c851c}
+.cover{min-height:240px;padding:45px 25px;background:linear-gradient(120deg,#063780,#087bfa);color:white;display:flex;align-items:center;justify-content:center;text-align:center}
+.cover h1{font-size:clamp(30px,6vw,52px);margin:0 0 12px}
+.cover p{font-size:17px;line-height:1.7;margin:0}
+.content{display:grid;grid-template-columns:260px 1fr;gap:28px;padding:28px}
+.identity{text-align:center}
+.avatar{width:140px;height:140px;border-radius:50%;margin:-65px auto 15px;background:#e3efff;border:5px solid white;box-shadow:0 2px 12px #0002;display:grid;place-items:center;color:#0755c9;font-size:42px;font-weight:bold;overflow:hidden;position:relative}
+.avatar img{position:absolute;width:100%;height:100%;object-fit:cover}
+.identity h2{margin:8px 0;font-size:25px}
+.identity p{color:#61738b;line-height:1.7}
+h3{color:#0755c9;margin:0 0 15px}
+.details{min-width:0}
+.info{display:grid;grid-template-columns:105px 1fr;gap:10px;padding:13px 4px;border-bottom:1px solid #dbe8fa;line-height:1.6}
+.label{font-weight:bold;color:#0755c9}
+.value{overflow-wrap:anywhere}
+a{color:#0755c9}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-block;padding:12px 17px;border-radius:10px;background:#0755c9;color:white;text-decoration:none;font-weight:bold}
+.btn.light{background:#eaf3ff;color:#0755c9;border:1px solid #c8ddfb}
+.quote{text-align:center;background:#f3f8ff;padding:20px;color:#31598c;line-height:1.8}
+footer{text-align:center;padding:18px;background:#063780;color:white;font-size:13px}
+@media(max-width:650px){
+ .page{margin:0;border-radius:0}
+ .cover{min-height:210px;padding:30px 16px}
+ .content{grid-template-columns:1fr;gap:25px;padding:20px 16px}
+ .avatar{margin-top:-65px}
+ .info{grid-template-columns:95px 1fr}
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+<header class="cover">
+ <div>
+  <h1>Borhan Uddin</h1>
+  <p>MY PERSONAL PROFILE</p>
+  <p>স্বপ্ন দেখুন • পরিকল্পনা করুন • এগিয়ে যান</p>
+ </div>
+</header>
+
+<div class="content">
+ <section class="identity">
+  <div class="avatar">
+   BU
+   <img src="profile.jpg" alt="Profile photo"
+        onerror="this.remove()">
+  </div>
+  <h2>Borhan Uddin</h2>
+  <p>Digital Visiting Card<br>আমার ব্যক্তিগত পরিচিতি</p>
+ </section>
+
+ <section class="details">
+  <h3>ব্যক্তিগত তথ্য</h3>
+
+  <div class="info"><div class="label">নাম</div><div class="value">Borhan Uddin</div></div>
+  <div class="info"><div class="label">ঠিকানা</div><div class="value">কৃষ্ণনগর, ঝিকরগাছা, যশোর</div></div>
+  <div class="info"><div class="label">মোবাইল</div><div class="value"><a href="tel:+8801922141412">01922141412</a></div></div>
+  <div class="info"><div class="label">WhatsApp</div><div class="value"><a href="https://wa.me/8801922141412">WhatsApp-এ যোগাযোগ করুন</a></div></div>
+  <div class="info"><div class="label">Facebook</div><div class="value">নিজের Facebook প্রোফাইল লিংক যোগ করুন</div></div>
+  <div class="info"><div class="label">বর্তমান পেশা</div><div class="value">এখানে নিজের বর্তমান পেশা লিখুন</div></div>
+  <div class="info"><div class="label">শিক্ষাগত যোগ্যতা</div><div class="value">এখানে নিজের শিক্ষাগত যোগ্যতা লিখুন</div></div>
+  <div class="info"><div class="label">দক্ষতা</div><div class="value">এখানে নিজের দক্ষতাগুলো লিখুন</div></div>
+  <div class="info"><div class="label">লক্ষ্য</div><div class="value">নিজেকে দক্ষ করে গড়ে তোলা</div></div>
+
+  <div class="links">
+   <a class="btn" href="tel:+8801922141412">কল করুন</a>
+   <a class="btn" href="https://wa.me/8801922141412">WhatsApp</a>
+   <a class="btn light" href="contact.vcf" download>Save Contact</a>
+  </div>
+ </section>
+</div>
+
+<div class="quote">“স্বপ্ন দেখো, পরিকল্পনা করো, আর কাজে লেগে পড়ো।”</div>
+<footer>© Borhan Uddin | Digital Visiting Card</footer>
+
+</main>
+</body>
+</html>
